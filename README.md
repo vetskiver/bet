@@ -43,7 +43,7 @@ In this project, I:
 - Set up a database using Supabase and performed CRUD operations to manage data for the application.
 
 ## Demo
-A demo of the enhanced version is available here:
+A demo of the project
 ![Video Walkthrough](https://github.com/vetskiver/bet/blob/master/bet-demo.gif)
 
 Getting Started
