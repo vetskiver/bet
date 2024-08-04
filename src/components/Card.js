@@ -18,7 +18,7 @@ const Card = (props) =>  {
             .eq('id', props.id)
             .single();
         
-        setCount(data ? data.betCount : 0);
+        setCount(data ? data.betCount: 0);
     };
 
     fetchCount();
