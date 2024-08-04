@@ -1,10 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './CreatePost.css'
+import { supabase } from '../client'
+
 
 const CreatePost = () => {
 
-    const [post, setPost] = useState({title: "", author: "", description: ""})
+    const [post, setPost] = useState({title: "", author: "", description: ""});
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const {name, value} = event.target;
@@ -16,9 +20,16 @@ const CreatePost = () => {
         })
     }
 
+    const createPost = async (event) => {
+        event.preventDefault();
+        await supabase.from('Posts').insert({title: post.title, author: post.author, description: post.description})
+        setPost({ title: "", author: "", description: "" });
+        navigate("/");
+    };
+
     return (
         <div>
-            <form>
+            <form onSubmit={createPost}>
                 <label for="title">Title</label> <br />
                 <input type="text" id="title" name="title" onChange={handleChange} /><br />
                 <br/>
@@ -31,10 +42,10 @@ const CreatePost = () => {
                 <textarea rows="5" cols="50" id="description" onChange={handleChange}>
                 </textarea>
                 <br/>
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Submit" onClick={createPost} />
             </form>
         </div>
     )
 }
 
-export default CreatePost
+export default CreatePost;
